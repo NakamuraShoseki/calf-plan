@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2f6b4f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>ふくらはぎ改善と減量プラン</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Dela+Gothic+One&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}
+/* Layout: one narrow column of grouped checklists, phone-first; section label + count, items as tappable rows */
+:root{
+  --bg:#f3f5f2; --surface:#ffffff; --fg:#1d2420; --muted:#5d6a62; --line:#d9e0db;
+  --accent:#2f6b4f; --accent-soft:#e2eee7; --warn:#a4532b; --warn-soft:#f6e7de;
+  --display:"Dela Gothic One","Zen Kaku Gothic New",sans-serif;
+  --body:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141a17; --surface:#1c2420; --fg:#e6ece8; --muted:#9aa8a0; --line:#2e3933;
+  --accent:#7cc39f; --accent-soft:#22342b; --warn:#e3a07c; --warn-soft:#3a2a22; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141a17; --surface:#1c2420; --fg:#e6ece8; --muted:#9aa8a0; --line:#2e3933;
+  --accent:#7cc39f; --accent-soft:#22342b; --warn:#e3a07c; --warn-soft:#3a2a22; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.65;font-size:15px}
+.wrap{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:flex;flex-direction:column;gap:28px}
+header{display:flex;flex-direction:column;gap:8px}
+h1{font-family:var(--display);font-weight:400;font-size:1.6rem;line-height:1.3;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:0;font-size:.9rem}
+.stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.stat{font-family:var(--mono);font-size:.78rem;background:var(--accent-soft);color:var(--accent);padding:4px 10px;border-radius:999px;font-variant-numeric:tabular-nums}
+section{display:flex;flex-direction:column;gap:10px}
+.sh{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:2px solid var(--fg);padding-bottom:6px}
+h2{font-size:1.05rem;font-weight:700;margin:0}
+.when{font-size:.78rem;color:var(--muted);letter-spacing:.04em;white-space:nowrap}
+.note{font-size:.85rem;color:var(--muted);margin:0}
+ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+li+li{border-top:1px solid var(--line)}
+label{display:grid;grid-template-columns:22px 1fr;gap:12px;padding:12px 14px;cursor:pointer;align-items:start}
+label:hover{background:var(--accent-soft)}
+input[type=checkbox]{appearance:none;width:20px;height:20px;margin:2px 0 0;border:2px solid var(--muted);border-radius:5px;display:grid;place-content:center;cursor:pointer;background:var(--surface)}
+input[type=checkbox]:checked{background:var(--accent);border-color:var(--accent)}
+input[type=checkbox]:checked::after{content:"";width:5px;height:10px;border:solid var(--surface);border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+input[type=checkbox]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.t{min-width:0}
+.t b{font-weight:700;display:block}
+.t span{display:block;font-size:.85rem;color:var(--muted)}
+li.done .t b{text-decoration:line-through;color:var(--muted)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.alert{background:var(--warn-soft);border:1px solid var(--warn);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.alert h2{color:var(--warn)}
+.alert p{margin:0;font-size:.9rem}
+.alert ul{background:transparent;border:0}
+.alert li{font-size:.88rem;padding:2px 0}
+.alert li+li{border:0}
+.foot{display:flex;justify-content:flex-end}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{padding:8px 0;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font-weight:700;font-size:.9rem;display:flex;flex-direction:column;align-items:center;gap:2px}
+.day small{font-size:.65rem;font-weight:500;color:var(--muted)}
+.day.work{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.day.work small{color:var(--surface)}
+.grid{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.row{display:grid;grid-template-columns:52px 1fr;gap:12px;padding:12px 14px;align-items:start}
+.row+.row{border-top:1px solid var(--line)}
+.dname{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.dname strong{font-size:1.05rem}
+.pill{font-size:.68rem;padding:1px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.row.work .pill{background:var(--warn-soft);color:var(--warn)}
+.plan{min-width:0;display:flex;flex-direction:column;gap:3px;font-size:.88rem}
+.plan .k{color:var(--muted);font-size:.75rem;margin-right:6px}
+button{font:inherit;font-size:.85rem;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer}
+button:hover{color:var(--fg);border-color:var(--fg)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header>
+  <h1>ふくらはぎ改善と減量プラン</h1>
+  <p class="sub">163cm・71.2kg・体脂肪約20%からのスタート。足首の硬さと偏平足を直しつつ、筋肉を守って脂肪を落とす。</p>
+  <div class="stats">
+    <span class="stat">減量 週0.3〜0.5kg</span>
+    <span class="stat">たんぱく質 115〜140g/日</span>
+    <span class="stat">ニートゥウォール 目標10cm</span>
+  </div>
+</header>
+
+<section id="week">
+  <div class="sh"><h2>1週間の早見表</h2><span class="when">曜日をタップで勤務切替</span></div>
+  <p class="note">最初は土日を勤務日にしてあります（例）。実際のシフトに合わせて切り替えると、食事と運動が自動で並び替わります。</p>
+  <div class="days" id="dayToggles"></div>
+  <div class="grid" id="weekGrid"></div>
+  <p class="note">毎日共通：足首ケア（お風呂上がり、勤務日は帰宅後に必ず）とショートフット。</p>
+</section>
+
+<section>
+  <div class="sh"><h2>足首・ふくらはぎケア</h2><span class="when">毎日 5〜10分</span></div>
+  <p class="note">お風呂上がりが一番伸びる。キャディーの日は帰宅後に必ず。時間がない日はニートゥウォールだけでOK。</p>
+  <ul>
+    <li><label><input type="checkbox" id="c1"><span class="t"><b>フォームローラーでほぐす</b><span>ふくらはぎを乗せて転がす。各1〜2分。なければ太めのペットボトルや麺棒</span></span></label></li>
+    <li><label><input type="checkbox" id="c2"><span class="t"><b>段差ストレッチ（膝を伸ばす）</b><span>段差に母指球を乗せてかかとを落とす。片脚ずつ<span class="num">60</span>秒</span></span></label></li>
+    <li><label><input type="checkbox" id="c3"><span class="t"><b>段差ストレッチ（膝を曲げる）</b><span>奥のヒラメ筋に効かせる。片脚ずつ<span class="num">60</span>秒</span></span></label></li>
+    <li><label><input type="checkbox" id="c4"><span class="t"><b>ニートゥウォール</b><span>かかとを浮かせず膝を壁へ。<span class="num">10</span>回×左右。最優先メニュー</span></span></label></li>
+    <li><label><input type="checkbox" id="c5"><span class="t"><b>足裏をボールで転がす</b><span>ゴルフボールかテニスボールで各<span class="num">1</span>分</span></span></label></li>
+  </ul>
+</section>
+
+<section>
+  <div class="sh"><h2>足裏・アーチのトレーニング</h2><span class="when">週3回〜毎日</span></div>
+  <ul>
+    <li><label><input type="checkbox" id="f1"><span class="t"><b>ショートフット</b><span>指を曲げずに土踏まずを引き上げて<span class="num">5</span>秒×<span class="num">10</span>回</span></span></label></li>
+    <li><label><input type="checkbox" id="f2"><span class="t"><b>タオルギャザー</b><span>床のタオルを足指でたぐり寄せる</span></span></label></li>
+    <li><label><input type="checkbox" id="f3"><span class="t"><b>カーフレイズ</b><span>母指球側に体重を乗せ、内側に倒れないように。ゆっくり下ろす</span></span></label></li>
+  </ul>
+</section>
+
+<section>
+  <div class="sh"><h2>食事</h2><span class="when">休日 約2,000kcal</span></div>
+  <ul>
+    <li><label><input type="checkbox" id="m1"><span class="t"><b>勤務日は＋300〜500kcal</b><span>朝の白米を<span class="num">120g→180〜200g</span>に、またはおにぎり・バナナをラウンド中に</span></span></label></li>
+    <li><label><input type="checkbox" id="m2"><span class="t"><b>たんぱく質を1日115〜140g</b><span>朝のプロテイン＋卵を継続。昼の定食はそのままでOK</span></span></label></li>
+    <li><label><input type="checkbox" id="m3"><span class="t"><b>汗をかく日は水分とミネラル</b><span>スポーツドリンクや塩分タブレットを持っていく</span></span></label></li>
+    <li><label><input type="checkbox" id="m4"><span class="t"><b>エアロバイクの日は食事を調整</b><span>勤務日に漕ぐならその分（<span class="num">200〜300</span>kcal）足す</span></span></label></li>
+  </ul>
+</section>
+
+<section>
+  <div class="sh"><h2>運動</h2><span class="when">休日中心</span></div>
+  <p class="note">勤務日は脚が疲れているので休みか上半身だけ。追い込まず、限界の2〜3回手前で止める。</p>
+  <ul>
+    <li><label><input type="checkbox" id="e1"><span class="t"><b>自重トレ 週2〜3回・15〜20分</b><span>腕立て（膝つき可）、斜め懸垂・ネガティブ懸垂、プランク。各2〜3セット。上半身中心</span></span></label></li>
+    <li><label><input type="checkbox" id="e2"><span class="t"><b>脚は片脚系で維持</b><span>ピストル、シュリンプ、ブルガリアンをゆっくり。普通のスクワットは軽すぎる</span></span></label></li>
+    <li><label><input type="checkbox" id="e3"><span class="t"><b>エアロバイク 週2〜3回・20〜30分</b><span>会話できる強さ。土踏まず寄りで踏み、太ももとお尻で漕ぐ</span></span></label></li>
+    <li><label><input type="checkbox" id="e4"><span class="t"><b>慣れたら週1回インターバル</b><span><span class="num">30</span>秒全力→<span class="num">90</span>秒ゆっくりを<span class="num">6〜8</span>本</span></span></label></li>
+    <li><label><input type="checkbox" id="e5"><span class="t"><b>足首を使う動きを少しずつ</b><span>スキップ→その場の小ジャンプ→左右ステップ。張り始めたら止めて、どの動きからか確認</span></span></label></li>
+  </ul>
+</section>
+
+<section>
+  <div class="sh"><h2>歩き方と靴</h2><span class="when">普段から</span></div>
+  <ul>
+    <li><label><input type="checkbox" id="w1"><span class="t"><b>かかとから着地して足裏全体に乗せる</b><span>つま先で蹴らず、お尻と太もも裏で脚を後ろに送る。歩幅は少し狭め</span></span></label></li>
+    <li><label><input type="checkbox" id="w3"><span class="t"><b>階段は足裏全体を段に乗せる</b><span>かかとまで乗せ、少し前傾して太ももとお尻で体を押し上げる。つま先立ちで上らない</span></span></label></li>
+    <li><label><input type="checkbox" id="w2"><span class="t"><b>中敷きはキャディーと運動の日に使う</b><span>大学の日はなしでもOK</span></span></label></li>
+  </ul>
+</section>
+
+<section>
+  <div class="sh"><h2>記録</h2><span class="when">週1回ほど</span></div>
+  <ul>
+    <li><label><input type="checkbox" id="r1"><span class="t"><b>体重とウエストを測る</b><span>2〜3週の平均で判断。週0.5kgより速く減っていたら食事を少し増やす</span></span></label></li>
+    <li><label><input type="checkbox" id="r2"><span class="t"><b>ニートゥウォールの距離を測る</b><span>つま先から壁まで何cmで膝がつくか。目標<span class="num">10</span>cm前後</span></span></label></li>
+    <li><label><input type="checkbox" id="r3"><span class="t"><b>張りが出た日をメモする</b><span>どのホール・何時ごろ・前日の睡眠・食事・汗の量。午前と午後どちらが多いか</span></span></label></li>
+  </ul>
+</section>
+
+<div class="alert" role="note">
+  <h2>スポーツ整形外科に行く目安</h2>
+  <p>ストレッチと足裏トレを1〜2か月続けても運動中の張りが変わらないとき。張っているときに足のしびれやつま先の上げにくさがあれば早めに。</p>
+  <p>伝えること</p>
+  <ul>
+    <li>高2冬に右脛を疲労骨折、その後から両ふくらはぎが張るようになった</li>
+    <li>張る場所（脛の前・外側か、ふくらはぎの裏か）と、休んで何分で引くか</li>
+    <li>偏平足、脚を揃えてしゃがめない、つま先で蹴る歩き方</li>
+  </ul>
+</div>
+
+<div class="foot"><button type="button" id="reset">チェックをすべて外す</button></div>
+</div>
+
+<script>
+(function(){
+  var KEY="sho-calf-week-v1", names=["月","火","水","木","金","土","日"];
+  var work=[false,false,false,false,false,true,true];
+  try{var s=JSON.parse(localStorage.getItem(KEY)); if(Array.isArray(s)&&s.length===7) work=s;}catch(e){}
+  var tg=document.getElementById('dayToggles'), grid=document.getElementById('weekGrid');
+  function render(){
+    tg.innerHTML=""; grid.innerHTML="";
+    var off=[]; work.forEach(function(w,i){ if(!w) off.push(i); });
+    var plan={};
+    off.forEach(function(d,k){ plan[d]=(k%2===0)?"body":"bike"; });
+    var bikes=off.filter(function(d){return plan[d]==="bike";});
+    var lastBike=bikes.length?bikes[bikes.length-1]:-1;
+    names.forEach(function(n,i){
+      var b=document.createElement('button');
+      b.type="button"; b.className="day"+(work[i]?" work":"");
+      b.setAttribute('aria-pressed',work[i]?"true":"false");
+      b.innerHTML=n+"<small>"+(work[i]?"勤務":"休み")+"</small>";
+      b.addEventListener('click',function(){ work[i]=!work[i]; try{localStorage.setItem(KEY,JSON.stringify(work));}catch(e){} render(); });
+      tg.appendChild(b);
+      var food, move, extra=[];
+      if(work[i]){
+        food="2,300〜2,500kcal（朝の白米180〜200g or おにぎり・バナナ持参）＋スポドリ・塩分";
+        move="運動は休み、やるなら上半身だけ";
+        extra.push("中敷きを使う");
+        extra.push("張りが出たらメモ");
+      } else {
+        food="約2,000kcal";
+        if(plan[i]==="body") move="自重トレ15〜20分（上半身中心＋片脚系）＋足裏トレ";
+        else move="エアロバイク20〜30分"+(i===lastBike?"（慣れたらインターバル）":"")+"＋ジャンプ・ステップを少し";
+      }
+      if(i===0) extra.push("体重・ウエスト・ニートゥウォール計測");
+      var r=document.createElement('div');
+      r.className="row"+(work[i]?" work":"");
+      r.innerHTML='<div class="dname"><strong>'+n+'</strong><span class="pill">'+(work[i]?"勤務":"休み")+'</span></div>'+
+        '<div class="plan"><div><span class="k">食事</span>'+food+'</div><div><span class="k">運動</span>'+move+'</div>'+
+        (extra.length?'<div><span class="k">その他</span>'+extra.join("、")+'</div>':'')+'</div>';
+      grid.appendChild(r);
+    });
+  }
+  render();
+})();
+(function(){
+  var KEY="sho-calf-plan-v1", state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){state={};}
+  var boxes=document.querySelectorAll('input[type=checkbox]');
+  function paint(b){var li=b.closest('li'); if(li) li.classList.toggle('done',b.checked);}
+  boxes.forEach(function(b){
+    if(state[b.id]) b.checked=true;
+    paint(b);
+    b.addEventListener('change',function(){
+      state[b.id]=b.checked; paint(b);
+      try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+    });
+  });
+  document.getElementById('reset').addEventListener('click',function(){
+    boxes.forEach(function(b){b.checked=false;paint(b);});
+    state={}; try{localStorage.removeItem(KEY);}catch(e){}
+  });
+})();
+</script>
+
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+</script>
+</body>
+</html>
